@@ -6,7 +6,7 @@ namespace AlinSpace.Remote.TestClient
     {
         static void Main(string[] args)
         {
-            var pingApi = RestService.For<IPing>("https://localhost:5300");
+            var pingApi = RestService.For<IPing>("http://localhost:5086/");
 
             var response = pingApi.PingAsync(new PingRequest()).Result;
 

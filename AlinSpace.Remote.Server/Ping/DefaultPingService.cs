@@ -1,17 +1,15 @@
-﻿using AlinSpace.Remote.Server;
-
-namespace AlinSpace.Remote.TestServer.AspNetCore
+﻿namespace AlinSpace.Remote.Server
 {
-    public class PingService : IPing
+    public class DefaultPingService : IPing
     {
         public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
         {
             return RequestResponseHandler
                 .New<PingRequest, PingResponse>(request, cancellationToken)
-                .HandleAsync(async (request, response, cancellationToken) =>
+                .HandleAsync((request, response, cancellationToken) =>
                 {
-
-
+                    response.Content = request.Content;
+                    return Task.CompletedTask;
                 });
         }
     }

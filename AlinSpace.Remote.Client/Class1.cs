@@ -1,7 +1,6 @@
 ﻿namespace AlinSpace.Remote.Client
 {
-    public class Class1
+    public static class Client
     {
-
     }
 }

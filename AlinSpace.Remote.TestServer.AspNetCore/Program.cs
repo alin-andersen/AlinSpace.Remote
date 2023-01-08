@@ -1,3 +1,6 @@
+using AlinSpace.Remote.Server;
+using AlinSpace.Remote.Server.AspNetCore;
+
 namespace AlinSpace.Remote.TestServer.AspNetCore
 {
     public class Program
@@ -6,11 +9,20 @@ namespace AlinSpace.Remote.TestServer.AspNetCore
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddScoped<IPing, PingService>();
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+
+            builder.Services.AddScoped<IPing, DefaultPingService>();
+            builder.Services.AddScoped<IHealth, DefaultHealthService>();
+            builder.Services.AddScoped<IEndpoint, DefaultEndpointService>();
 
             var app = builder.Build();
 
-            app.MapS
+            app.MapService<IPing>();
+            app.MapService<IHealth>();
+            app.MapService<IEndpoint>();
+
+            app.Map("/", () => "HelloWorld");
 
             app.Run();
         }

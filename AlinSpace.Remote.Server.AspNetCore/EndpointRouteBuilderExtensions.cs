@@ -26,7 +26,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
             return options;
         });
 
-        public static void MapAlinSpaceRemoteService(
+        public static void MapService(
             this IEndpointRouteBuilder endpointRouteBuilder,
             Type serviceType,
             Func<HttpContext, Task>? beforeMethodInvocation = null,
@@ -39,22 +39,76 @@ namespace AlinSpace.Remote.Server.AspNetCore
 
             foreach (var methodInfo in methodInfos)
             {
-                var path = $"{methodInfo.DeclaringType?.FullName}.{methodInfo.Name}";
+                (HttpMethod httpMethod, string path) = GetHttpMethodAndPath(methodInfo);
 
                 var parameters = methodInfo.GetParameters();
 
-                endpointRouteBuilder
-                    .MapPost(path, new RequestDelegate(async context 
-                        => await HandleRequest(
-                            serviceType,
-                            methodInfo,
-                            parameters,
-                            context, 
-                            beforeMethodInvocation, 
-                            afterMethodInvocation, 
-                            exceptionHandler)))
-                    .WithName(path);
+                switch(httpMethod.Method)
+                {
+                    case "GET":
+
+                        endpointRouteBuilder
+                            .MapGet(path, new RequestDelegate(async context
+                                => await HandleRequest(
+                                    serviceType,
+                                    methodInfo,
+                                    parameters,
+                                    context,
+                                    beforeMethodInvocation,
+                                    afterMethodInvocation,
+                                    exceptionHandler)))
+                            .WithName(path);
+
+                        break;
+
+                    case "POST":
+
+                        endpointRouteBuilder
+                            .MapPost(path, new RequestDelegate(async context
+                                => await HandleRequest(
+                                    serviceType,
+                                    methodInfo,
+                                    parameters,
+                                    context,
+                                    beforeMethodInvocation,
+                                    afterMethodInvocation,
+                                    exceptionHandler)))
+                            .WithName(path);
+
+                        break;
+
+                    case "PUT":
+
+                        endpointRouteBuilder
+                            .MapPut(path, new RequestDelegate(async context
+                                => await HandleRequest(
+                                    serviceType,
+                                    methodInfo,
+                                    parameters,
+                                    context,
+                                    beforeMethodInvocation,
+                                    afterMethodInvocation,
+                                    exceptionHandler)))
+                            .WithName(path);
+
+                        break;
+
+                    default:
+                        break;
+                }
             }
+        }
+
+        static (HttpMethod, string) GetHttpMethodAndPath(MethodInfo methodInfo)
+        {
+            var httpMethodAttribute = methodInfo.GetCustomAttribute<Refit.HttpMethodAttribute>();
+
+            if (httpMethodAttribute == null)
+            {
+                throw new Exception();
+            }
+
+            return (httpMethodAttribute.Method, httpMethodAttribute.Path);
         }
 
         static async Task HandleRequest(
@@ -73,10 +127,9 @@ namespace AlinSpace.Remote.Server.AspNetCore
                     .RequestServices
                     .GetRequiredService(serviceType);
 
-                // Get scoped cancellation token.
-                var cancellationToken = new CancellationToken?(context
-                    .RequestServices
-                    .GetService<CancellationToken>());
+                //var cancellationToken = context
+                //    .RequestServices
+                //    .GetService<CancellationToken>();
 
                 #region Read and deserialize 
 
@@ -102,7 +155,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
 
                 #region Invoke service
 
-                var t = methodInfo.Invoke(service, parameters: new object[] { parameter, cancellationToken.GetValueOrDefault() });
+                var t = methodInfo.Invoke(service, parameters: new object[] { parameter, new CancellationToken() });
 
                 if (t == null)
                 {
@@ -148,37 +201,29 @@ namespace AlinSpace.Remote.Server.AspNetCore
             }
         }
 
-        /// <summary>
-        /// Maps the methods of the given service type to paths.
-        /// </summary>
-        /// <typeparam name="TService">Type of service.</typeparam>
-        /// <param name="endpointRouteBuilder"></param>
-        /// <param name="methodToPathProvider"></param>
-        /// <remarks>
-        /// All HTTP methods are POST.
-        /// Input and output object has to be serializeable and deserializeable.
-        /// All methods on the service has to return <see cref="Task{TResult}"/> or <see cref="Task"/>.
-        /// </remarks>
-        public static void MapService<TService>(this IEndpointRouteBuilder endpointRouteBuilder, Func<MethodInfo, string> methodToPathProvider = null)
+        public static void MapService<TService>(
+            this IEndpointRouteBuilder endpointRouteBuilder,
+            Func<HttpContext, Task>? beforeMethodInvocation = null,
+            Func<HttpContext, Task>? afterMethodInvocation = null,
+            Func<HttpContext, Exception, Task<bool>>? exceptionHandler = null)
         {
-            MapService(endpointRouteBuilder, typeof(TService), methodToPathProvider);
+            MapService(endpointRouteBuilder, typeof(TService), beforeMethodInvocation, afterMethodInvocation, exceptionHandler);
         }
 
         public static void MapServices(
             this IEndpointRouteBuilder endpointRouteBuilder,
             IEnumerable<Type> serviceTypes,
-            Action<HttpContext, IResolverContext> beforeServiceInvocation = null,
-            Action<HttpContext, IResolverContext> afterServiceInvocation = null,
-            Func<HttpContext, IResolverContext, Exception, Task> exceptionHandler = null)
+            Func<HttpContext, Task>? beforeMethodInvocation = null,
+            Func<HttpContext, Task>? afterMethodInvocation = null,
+            Func<HttpContext, Exception, Task<bool>>? exceptionHandler = null)
         {
             foreach(var serviceType in serviceTypes)
             {
                 MapService(
                     endpointRouteBuilder: endpointRouteBuilder,
                     serviceType: serviceType,
-                    methodToPath: methodToPath,
-                    beforeServiceInvocation: beforeServiceInvocation,
-                    afterServiceInvocation: afterServiceInvocation,
+                    beforeMethodInvocation: beforeMethodInvocation,
+                    afterMethodInvocation: afterMethodInvocation,
                     exceptionHandler: exceptionHandler);
             }
         }
