@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace AlinSpace.Remote.Server.AspNetCore
 {
@@ -14,18 +13,6 @@ namespace AlinSpace.Remote.Server.AspNetCore
     /// </summary>
     public static class EndpointRouteBuilderExtensions
     {
-        static Lazy<JsonSerializerOptions> serializerOptions = new Lazy<JsonSerializerOptions>(() =>
-        {
-            var options = new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true,
-            };
-
-            options.Converters.Add(new JsonStringEnumConverter());
-
-            return options;
-        });
-
         public static void MapService(
             this IEndpointRouteBuilder endpointRouteBuilder,
             Type serviceType,
@@ -139,7 +126,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
                 if (string.IsNullOrWhiteSpace(jsonData))
                     jsonData = "{}";
 
-                var parameter = JsonSerializer.Deserialize(jsonData, parameterInfos.First().ParameterType, serializerOptions.Value);
+                var parameter = JsonSerializer.Deserialize(jsonData, parameterInfos.First().ParameterType, JsonSerialization.MaximalCompatibilityOptions);
 
                 if (parameter == null)
                 {
@@ -180,7 +167,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
                 }
 
                 var result = resultProperty.GetValue(task);
-                await context.Response.WriteAsync(JsonSerializer.Serialize(result, serializerOptions.Value));
+                await context.Response.WriteAsync(JsonSerializer.Serialize(result, JsonSerialization.MaximalCompatibilityOptions));
 
                 #endregion
 

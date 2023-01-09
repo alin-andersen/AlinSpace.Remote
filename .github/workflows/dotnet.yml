@@ -1,0 +1,65 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  AlinSpace_Remote:
+    name: AlinSpace.Remote
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore
+      run: dotnet restore AlinSpace.Remote/AlinSpace.Remote.csproj
+    - name: Building
+      run: dotnet build AlinSpace.Remote/AlinSpace.Remote.csproj --no-restore -c Release
+    - name: Pack
+      run: dotnet pack AlinSpace.Remote/AlinSpace.Remote.csproj -c Release -o . 
+    - name: Publish
+      run: dotnet nuget push AlinSpace.Remote.*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+
+  AlinSpace_Remote_Server:
+    name: AlinSpace.Remote.Server
+    needs: [AlinSpace_Remote]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore
+      run: dotnet restore AlinSpace.Remote.Server/AlinSpace.Remote.Server.csproj
+    - name: Building
+      run: dotnet build AlinSpace.Remote.Server/AlinSpace.Remote.Server.csproj --no-restore -c Release
+    - name: Pack
+      run: dotnet pack AlinSpace.Remote.Server/AlinSpace.Remote.Server.csproj -c Release -o . 
+    - name: Publish
+      run: dotnet nuget push AlinSpace.Remote.Server.*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+
+  AlinSpace_Remote_Server_AspNetCore:
+    name: AlinSpace.Remote.Server.AspNetCore
+    needs: [AlinSpace_Remote_Server]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore
+      run: dotnet restore AlinSpace.Remote.Server.AspNetCore/AlinSpace.Remote.Server.AspNetCore.csproj
+    - name: Building
+      run: dotnet build AlinSpace.Remote.Server.AspNetCore/AlinSpace.Remote.Server.AspNetCore.csproj --no-restore -c Release
+    - name: Pack
+      run: dotnet pack AlinSpace.Remote.Server.AspNetCore/AlinSpace.Remote.Server.AspNetCore.csproj -c Release -o . 
+    - name: Publish
+      run: dotnet nuget push AlinSpace.Remote.Server.AspNetCore.*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate

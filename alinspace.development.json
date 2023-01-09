@@ -1,0 +1,25 @@
+{
+    "PathToSolutionFile": "AlinSpace.Remote.sln",
+    "PathToLocalNugetFolder": "C:\\AlinSpace\\Nuget",
+    "PathToDebugFiles": "C:\\AlinSpace\\Pdbs",
+    "BuildInDebugConfiguration": true,
+    "Author": "Alin Andersen",
+    "Copyright": "Copyright © 2022 Alin Andersen",
+    "RepositoryUrl": "https://github.com/onixion/AlinSpace.Remote",
+    "ProjectUrl": "https://github.com/onixion/AlinSpace.Remote",
+    "Tags": "alinspace; alin; space; remote;",
+    "Projects": [
+      {
+        "Name": "AlinSpace.Remote",
+        "Tags": "client;"
+      },
+      {
+        "Name": "AlinSpace.Remote.Server",
+        "Tags": "server;"
+      },
+      {
+        "Name": "AlinSpace.Remote.Server.AspNetCore",
+        "Tags": "server; asp; aspnetcore;"
+      }
+    ]
+  }

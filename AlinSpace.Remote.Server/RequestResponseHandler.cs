@@ -26,12 +26,12 @@
         /// <summary>
         /// Gets or sets the flag indicating whether or not the exception details shall be included in the response.
         /// </summary>
-        public bool IncludeExceptionDetailsInResponse { get; set; } = false;
+        public bool IncludeExceptionDetailsInResponse { get; set; }
 
         /// <summary>
         /// Gets or sets the flag indicating wether or not the timestamps shall be included.
         /// </summary>
-        public bool IncludeTimestamps { get; set; } = false;
+        public bool IncludeTimestamps { get; set; } = true;
 
         /// <summary>
         /// Constructor.

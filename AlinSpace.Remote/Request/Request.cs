@@ -29,21 +29,4 @@
     {
         public T? Value { get; set; }
     }
-
-    /// <summary>
-    /// Represents the page request.
-    /// </summary>
-    public class PageRequest : Request
-    {
-        public Page? Page { get; set; }
-    }
-
-    /// <summary>
-    /// Represents the page request.
-    /// </summary>
-    /// <typeparam name="T">Type of the value.</typeparam>
-    public class PageRequest<T> : Request<T>
-    {
-        public Page? Page { get; set; }
-    }
 }

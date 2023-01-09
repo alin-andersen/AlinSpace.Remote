@@ -1,14 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>0.0.2</Version>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\AlinSpace.Remote.Client\AlinSpace.Remote.Client.csproj" />
+    <ProjectReference Include="..\AlinSpace.Remote\AlinSpace.Remote.csproj" />
   </ItemGroup>
-
 </Project>
