@@ -1,4 +1,4 @@
-<img src="https://github.com/alin-andersen/AlinSpace.Jobs/blob/main/Assets/Icon.png" width="200" height="200">
+<img src="https://github.com/alin-andersen/AlinSpace.Remote/blob/main/Assets/Icon.png" width="200" height="200">
 
 # AlinSpace.Remote
 [![NuGet version (AlinSpace.Remote)](https://img.shields.io/nuget/v/AlinSpace.Remote.svg?style=flat-square)](https://www.nuget.org/packages/AlinSpace.Remote/)
