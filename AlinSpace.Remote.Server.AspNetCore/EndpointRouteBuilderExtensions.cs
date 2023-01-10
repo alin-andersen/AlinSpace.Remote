@@ -13,6 +13,14 @@ namespace AlinSpace.Remote.Server.AspNetCore
     /// </summary>
     public static class EndpointRouteBuilderExtensions
     {
+        /// <summary>
+        /// Maps the service type.
+        /// </summary>
+        /// <param name="endpointRouteBuilder"></param>
+        /// <param name="serviceType"></param>
+        /// <param name="beforeMethodInvocation"></param>
+        /// <param name="afterMethodInvocation"></param>
+        /// <param name="exceptionHandler"></param>
         public static void MapService(
             this IEndpointRouteBuilder endpointRouteBuilder,
             Type serviceType,

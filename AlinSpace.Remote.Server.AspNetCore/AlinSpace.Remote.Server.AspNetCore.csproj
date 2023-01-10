@@ -6,16 +6,15 @@
     <Copyright>Copyright © 2022 Alin Andersen</Copyright>
     <PackageTags>alinspace; alin; space; remote;server; asp; aspnetcore</PackageTags>
     <RepositoryUrl>https://github.com/onixion/AlinSpace.Remote</RepositoryUrl>
-    <Version>1.0.3</Version>
+    <Version>1.0.6</Version>
     <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AlinSpace.Remote.Server" Version="1.0.4" />
+    <PackageReference Include="AlinSpace.Remote.Server" Version="1.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Icon.png">

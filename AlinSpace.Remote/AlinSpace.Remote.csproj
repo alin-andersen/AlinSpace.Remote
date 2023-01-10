@@ -2,16 +2,17 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <Copyright>Copyright © 2022 Alin Andersen</Copyright>
-    <PackageTags>alinspace; alin; space; remote;client</PackageTags>
+    <PackageTags>alinspace; alin; space; remote</PackageTags>
     <RepositoryUrl>https://github.com/onixion/AlinSpace.Remote</RepositoryUrl>
-    <Version>1.0.5</Version>
+    <Version>1.0.23</Version>
     <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AlinSpace" Version="6.1.1" />
     <PackageReference Include="Refit" Version="6.3.2" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Icon.png">

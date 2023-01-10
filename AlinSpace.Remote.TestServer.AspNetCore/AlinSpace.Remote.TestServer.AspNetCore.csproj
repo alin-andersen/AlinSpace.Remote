@@ -3,9 +3,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>0.0.2</Version>
+    <Version>1.0.7</Version>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AlinSpace.Remote.Server.AspNetCore\AlinSpace.Remote.Server.AspNetCore.csproj" />
+    <PackageReference Include="AlinSpace.Remote.Server.AspNetCore" Version="1.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlinSpace.Remote.Test.Shared\AlinSpace.Remote.Test.Shared.csproj" />
   </ItemGroup>
 </Project>

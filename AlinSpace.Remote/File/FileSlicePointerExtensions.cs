@@ -1,10 +1,10 @@
-﻿namespace AlinSpace.Remote.Server
+﻿namespace AlinSpace.Remote
 {
-    public static class FileResponseExtensions
+    public static class FileSlicePointerExtensions
     {
-        //public static async Task ReadChunkAsync(
-        //    this FileDownloadResponse response, 
-        //    FileRequest request, 
+        //public static async Task ReadSliceAsync(
+        //    this FileSlicePointer pointer, 
+        //    FileSlice slice,
         //    string pathToFile)
         //{
         //    using var fileStream = new FileStream(
@@ -12,11 +12,11 @@
         //        mode: FileMode.Open,
         //        access: FileAccess.Read,
         //        share: FileShare.Read,
-        //        bufferSize: request.FileChunkSize);
+        //        bufferSize: pointer.Length);
 
-        //    var buffer = new byte[request.FileOffset];
+        //    var buffer = new byte[pointer.Offset];
 
-        //    var bytesRead = await fileStream.ReadAsync(buffer, request.FileOffset, request.FileChunkSize);
+        //    var bytesRead = await fileStream.ReadAsync(buffer, pointer.Offset, pointer.Length);
 
         //    if (bytesRead < 0)
         //    {
@@ -25,19 +25,19 @@
 
         //    // Set file size.
         //    fileStream.Seek(0, SeekOrigin.End);
-        //    response.FileSize = (int)fileStream.Position;
+        //    slice.FileSize = (int)fileStream.Position;
 
         //    // Set file data.
-        //    if (bytesRead < request.FileOffset)
+        //    if (bytesRead < pointer.Length)
         //    {
         //        var newBuffer = new byte[bytesRead];
         //        Buffer.BlockCopy(buffer, 0, newBuffer, 0, newBuffer.Length);
               
-        //        response.FileData = newBuffer;
+        //        slice.Data = newBuffer;
         //    }
         //    else
         //    {
-        //        response.FileData = buffer;
+        //        slice.Data = buffer;
         //    }
         //}
     }

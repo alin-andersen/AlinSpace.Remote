@@ -11,6 +11,10 @@
     "Projects": [
       {
         "Name": "AlinSpace.Remote",
+        "Tags": ""
+      },
+      {
+        "Name": "AlinSpace.Remote.Client",
         "Tags": "client;"
       },
       {

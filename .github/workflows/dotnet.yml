@@ -26,6 +26,25 @@ jobs:
     - name: Publish
       run: dotnet nuget push AlinSpace.Remote.*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
+  AlinSpace_Remote_Client:
+    name: AlinSpace.Remote.Client
+    needs: [AlinSpace_Remote]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore
+      run: dotnet restore AlinSpace.Remote.Client/AlinSpace.Remote.Client.csproj
+    - name: Building
+      run: dotnet build AlinSpace.Remote.Client/AlinSpace.Remote.Client.csproj --no-restore -c Release
+    - name: Pack
+      run: dotnet pack AlinSpace.Remote.Client/AlinSpace.Remote.Client.csproj -c Release -o . 
+    - name: Publish
+      run: dotnet nuget push AlinSpace.Remote.Client.*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+
   AlinSpace_Remote_Server:
     name: AlinSpace.Remote.Server
     needs: [AlinSpace_Remote]
