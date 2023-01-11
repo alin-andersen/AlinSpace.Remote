@@ -9,8 +9,13 @@ namespace AlinSpace.Remote.Client
     {
         private HubConnection hubConnection;
         private Subject<Event> subject = new();
+        private Subject<string> reconnectedSubject = new();
 
-        public IObservable<Event> Event => subject.AsObservable();
+        public string ConnectionId { get; private set; }
+
+        public IObservable<Event> WhenEvent => subject.AsObservable();
+
+        public IObservable<string> WhenReconnected => reconnectedSubject.AsObservable();
 
         public EventSource(Uri host, Action<IHubConnectionBuilder> configure = null)
         {
@@ -21,8 +26,16 @@ namespace AlinSpace.Remote.Client
             configure?.Invoke(hubConnectionBuilder);
 
             hubConnection = hubConnectionBuilder.Build();
+            hubConnection.On<string>(nameof(Remote.Event), OnReceivedEvent);
+            hubConnection.Reconnected += OnReconnected;
+        }
 
-            hubConnection.On<string>("Event", OnReceivedEvent);
+        private Task OnReconnected(string connectionId)
+        {
+            ConnectionId = connectionId;
+            reconnectedSubject.OnNext(ConnectionId);
+
+            return Task.CompletedTask;
         }
 
         private void OnReceivedEvent(string @event)
@@ -33,10 +46,14 @@ namespace AlinSpace.Remote.Client
         public async Task StartAsync()
         {
             await hubConnection.StartAsync();
+
+            ConnectionId = hubConnection.ConnectionId;
         }
 
         public async Task StopAsync()
         {
+            ConnectionId = null;
+
             await hubConnection.StopAsync();
         }
 

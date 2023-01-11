@@ -5,7 +5,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
 {
     public static class ClientProxyExtensions
     {
-        public static async Task SendAsync<T>(this IClientProxy clientProxy, T @object)
+        public static async Task SendEventAsync<T>(this IClientProxy clientProxy, T @object)
         {
             var @event = new Event
             {
@@ -13,7 +13,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
                 Data = JsonSerializer.Serialize(@object),
             };
 
-            await clientProxy.SendAsync("Event", @event.Serialize());
+            await clientProxy.SendAsync(nameof(Event), @event.Serialize());
         }
     }
 }

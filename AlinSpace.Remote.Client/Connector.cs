@@ -1,6 +1,6 @@
 ﻿using Refit;
 
-namespace AlinSpace.Remote
+namespace AlinSpace.Remote.Client
 {
     /// <summary>
     /// Represents the connector.
@@ -8,7 +8,7 @@ namespace AlinSpace.Remote
     public class Connector
     {
         private readonly HttpClient httpClient;
-        private readonly RefitSettings? refitSettings;
+        private readonly RefitSettings refitSettings;
 
         /// <summary>
         /// Constructor.

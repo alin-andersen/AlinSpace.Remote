@@ -7,9 +7,7 @@
     <Version>0.0.6</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AlinSpace.Remote.Client" Version="1.0.7" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\AlinSpace.Remote.Client\AlinSpace.Remote.Client.csproj" />
     <ProjectReference Include="..\AlinSpace.Remote.Test.Shared\AlinSpace.Remote.Test.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>

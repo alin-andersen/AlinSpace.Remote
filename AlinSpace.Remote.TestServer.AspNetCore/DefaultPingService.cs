@@ -7,6 +7,8 @@ namespace AlinSpace.Remote.TestServer.AspNetCore
 {
     public class DefaultPingService : IPing
     {
+        public static int Number { get; set; }
+
         private readonly IHubContext<TestHub> testHub;
 
         public DefaultPingService(IHubContext<TestHub> testHub)
@@ -16,20 +18,13 @@ namespace AlinSpace.Remote.TestServer.AspNetCore
 
         public async Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
         {
-            try
-            {
-                await testHub.Clients.All.SendAsync(new SomeEvent
-                {
-                    Number = 42,
-                    Name = "HLAO",
-                });
-            }
-            catch(Exception e)
-            {
-
-            }
+            Number++;
             
-
+            //await testHub.Clients.Client().SendAsync(new SomeEvent
+            //{
+            //    Number = Number,
+            //});
+            
             return await RequestResponseHandler
                 .New<PingRequest, PingResponse>(request, cancellationToken)
                 .HandleAsync((request, response, cancellationToken) =>
