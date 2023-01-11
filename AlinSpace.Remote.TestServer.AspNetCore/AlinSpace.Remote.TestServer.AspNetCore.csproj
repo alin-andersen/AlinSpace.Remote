@@ -6,7 +6,7 @@
     <Version>1.0.7</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AlinSpace.Remote.Server.AspNetCore" Version="1.0.6" />
+    <PackageReference Include="AlinSpace.Remote.Server.AspNetCore" Version="1.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlinSpace.Remote.Test.Shared\AlinSpace.Remote.Test.Shared.csproj" />
