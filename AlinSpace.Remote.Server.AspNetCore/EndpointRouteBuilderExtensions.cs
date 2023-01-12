@@ -21,12 +21,12 @@ namespace AlinSpace.Remote.Server.AspNetCore
         /// <param name="beforeMethodInvocation"></param>
         /// <param name="afterMethodInvocation"></param>
         /// <param name="exceptionHandler"></param>
-        public static void MapService(
+        public static void AlinSpaceRemoteMapService(
             this IEndpointRouteBuilder endpointRouteBuilder,
             Type serviceType,
-            Func<HttpContext, Task>? beforeMethodInvocation = null,
-            Func<HttpContext, Task>? afterMethodInvocation = null,
-            Func<HttpContext, Exception, Task<bool>>? exceptionHandler = null)
+            Func<HttpContext, Task> beforeMethodInvocation = null,
+            Func<HttpContext, Task> afterMethodInvocation = null,
+            Func<HttpContext, Exception, Task<bool>> exceptionHandler = null)
         {
             var methodInfos = serviceType
                 .GetMethods()
@@ -100,7 +100,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
 
             if (httpMethodAttribute == null)
             {
-                throw new Exception();
+                throw new Exception($"HttpMethodAttribute not found on method of service type {methodInfo.DeclaringType.FullName}.");
             }
 
             return (httpMethodAttribute.Method, httpMethodAttribute.Path);
@@ -111,9 +111,9 @@ namespace AlinSpace.Remote.Server.AspNetCore
             MethodInfo methodInfo,
             IEnumerable<ParameterInfo> parameterInfos,
             HttpContext context,
-            Func<HttpContext, Task>? beforeMethodInvocation,
-            Func<HttpContext, Task>? afterMethodInvocation,
-            Func<HttpContext, Exception, Task<bool>>? exceptionHandler)
+            Func<HttpContext, Task> beforeMethodInvocation,
+            Func<HttpContext, Task> afterMethodInvocation,
+            Func<HttpContext, Exception, Task<bool>> exceptionHandler)
         {
             try
             {
@@ -132,7 +132,9 @@ namespace AlinSpace.Remote.Server.AspNetCore
                 var jsonData = await reader.ReadToEndAsync();
 
                 if (string.IsNullOrWhiteSpace(jsonData))
+                {
                     jsonData = "{}";
+                }
 
                 var parameter = JsonSerializer.Deserialize(jsonData, parameterInfos.First().ParameterType, JsonSerialization.MaximalCompatibilityOptions);
 
@@ -196,25 +198,25 @@ namespace AlinSpace.Remote.Server.AspNetCore
             }
         }
 
-        public static void MapService<TService>(
+        public static void AlinSpaceRemoteMapService<TService>(
             this IEndpointRouteBuilder endpointRouteBuilder,
-            Func<HttpContext, Task>? beforeMethodInvocation = null,
-            Func<HttpContext, Task>? afterMethodInvocation = null,
-            Func<HttpContext, Exception, Task<bool>>? exceptionHandler = null)
+            Func<HttpContext, Task> beforeMethodInvocation = null,
+            Func<HttpContext, Task> afterMethodInvocation = null,
+            Func<HttpContext, Exception, Task<bool>> exceptionHandler = null)
         {
-            MapService(endpointRouteBuilder, typeof(TService), beforeMethodInvocation, afterMethodInvocation, exceptionHandler);
+            AlinSpaceRemoteMapService(endpointRouteBuilder, typeof(TService), beforeMethodInvocation, afterMethodInvocation, exceptionHandler);
         }
 
-        public static void MapServices(
+        public static void AlinSpaceRemoteMapService(
             this IEndpointRouteBuilder endpointRouteBuilder,
             IEnumerable<Type> serviceTypes,
-            Func<HttpContext, Task>? beforeMethodInvocation = null,
-            Func<HttpContext, Task>? afterMethodInvocation = null,
-            Func<HttpContext, Exception, Task<bool>>? exceptionHandler = null)
+            Func<HttpContext, Task> beforeMethodInvocation = null,
+            Func<HttpContext, Task> afterMethodInvocation = null,
+            Func<HttpContext, Exception, Task<bool>> exceptionHandler = null)
         {
             foreach(var serviceType in serviceTypes)
             {
-                MapService(
+                AlinSpaceRemoteMapService(
                     endpointRouteBuilder: endpointRouteBuilder,
                     serviceType: serviceType,
                     beforeMethodInvocation: beforeMethodInvocation,

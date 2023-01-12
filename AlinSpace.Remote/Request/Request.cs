@@ -11,6 +11,11 @@
         public string CorrelationId { get; set; }
 
         /// <summary>
+        /// Gets or sets the connection ID.
+        /// </summary>
+        public string ConnectionId { get; set; }
+
+        /// <summary>
         /// Gets or sets the metadata.
         /// </summary>
         public string Metadata { get; set; }
