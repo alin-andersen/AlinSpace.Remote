@@ -6,12 +6,19 @@
     /// <remarks>
     /// 0 - 1000 reserved.
     /// </remarks>
-    public enum ResponseCode
+    public enum ErrorCode
     {
-        Success = 0,
-        Error = 1,
-        ErrorInternal = 2,
+        None = 0,
+        Unknown = 1,
+        Internal = 2,
+
         RateLimitation = 3,
         Maintenance = 4,
+
+        NotFound = 100,
+
+        Authentication = 200,
+
+        Authorization = 300,
     }
 }

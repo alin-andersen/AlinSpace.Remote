@@ -5,7 +5,7 @@
         public Task<HealthResponse> GetAsync(HealthRequest request, CancellationToken cancellationToken = default)
         {
             return RequestResponseHandler
-               .New<HealthRequest, HealthResponse>(request, cancellationToken)
+               .New<HealthRequest, HealthResponse>(request, cancellationToken: cancellationToken)
                .HandleAsync((request, response, cancellationToken) =>
                {
                    response.Result = HealthResult.Healthy;

@@ -5,7 +5,7 @@
         public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
         {
             return RequestResponseHandler
-                .New<PingRequest, PingResponse>(request, cancellationToken)
+                .New<PingRequest, PingResponse>(request, cancellationToken: cancellationToken)
                 .HandleAsync((request, response, cancellationToken) =>
                 {
                     response.Content = request.Content;

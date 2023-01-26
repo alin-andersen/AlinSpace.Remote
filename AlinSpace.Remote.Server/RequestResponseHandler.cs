@@ -19,6 +19,11 @@
         public TResponse Response { get; set; } = new TResponse();
 
         /// <summary>
+        /// Gets the exception handler.
+        /// </summary>
+        public Func<TRequest, TResponse, Exception, Task> ExceptionHandler { get; set; }
+
+        /// <summary>
         /// Gets or sets the cancellation token.
         /// </summary>
         public CancellationToken CancellationToken { get; set; }
@@ -38,10 +43,11 @@
         /// </summary>
         /// <param name="request">Request.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        public RequestResponseHandler(TRequest request, CancellationToken cancellationToken = default)
+        public RequestResponseHandler(TRequest request, Func<TRequest, TResponse, Exception, Task> exceptionHandler = null, CancellationToken cancellationToken = default)
         {
             Request = request;
             Response.SetCorrelationIdFromRequest(request);
+            ExceptionHandler = exceptionHandler;
         }
 
         /// <summary>
@@ -62,12 +68,26 @@
             }
             catch(Exception e)
             {
-                Response.ResponseCode = ResponseCode.Error;
-
                 if (IncludeExceptionDetailsInResponse)
                 {
                     Response.ExceptionMessage = e.Message;
                     Response.ExceptionStacktrace = e.StackTrace;
+                }
+
+                if (ExceptionHandler == null)
+                {
+                    Response.ErrorCode = ErrorCode.Unknown;
+                }
+                else
+                {
+                    try
+                    {
+                        await ExceptionHandler.Invoke(Request, Response, e);
+                    }
+                    catch
+                    {
+                        Response.ErrorCode = ErrorCode.Internal;
+                    }
                 }
             }
 
@@ -82,11 +102,11 @@
 
     public class RequestResponseHandler
     {
-        public static RequestResponseHandler<TRequest, TResponse> New<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default)
+        public static RequestResponseHandler<TRequest, TResponse> New<TRequest, TResponse>(TRequest request, Func<TRequest, TResponse, Exception, Task> exceptionHandler = null, CancellationToken cancellationToken = default)
             where TRequest : Request
             where TResponse : Response, new()
         {
-            return new RequestResponseHandler<TRequest, TResponse>(request, cancellationToken);
+            return new RequestResponseHandler<TRequest, TResponse>(request, exceptionHandler, cancellationToken);
         }
     }
 }

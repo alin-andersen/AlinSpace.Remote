@@ -5,7 +5,7 @@
         public Task<EndpointResponse> GetAsync(EndpointRequest request, CancellationToken cancellationToken = default)
         {
             return RequestResponseHandler
-                .New<EndpointRequest, EndpointResponse>(request, cancellationToken)
+                .New<EndpointRequest, EndpointResponse>(request, cancellationToken: cancellationToken)
                 .HandleAsync((request, response, cancellationToken) =>
                 {
                     return Task.CompletedTask;

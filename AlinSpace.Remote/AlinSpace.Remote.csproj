@@ -6,7 +6,7 @@
     <Copyright>Copyright © 2022 Alin Andersen</Copyright>
     <PackageTags>alinspace; alin; space; remote</PackageTags>
     <RepositoryUrl>https://github.com/onixion/AlinSpace.Remote</RepositoryUrl>
-    <Version>1.0.27</Version>
+    <Version>1.0.30</Version>
     <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
