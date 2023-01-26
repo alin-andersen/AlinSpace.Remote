@@ -7,12 +7,22 @@ namespace AlinSpace.Remote
     /// </summary>
     public class Response
     {
-        #region ResponseCode
+        #region ErrorCode
 
         /// <summary>
         /// Gets or sets the error code.
         /// </summary>
         public ErrorCode ErrorCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the error message.
+        /// </summary>
+        public string ErrorMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the error.
+        /// </summary>
+        public string Error { get; set; }
 
         /// <summary>
         /// Gets the is success flag.

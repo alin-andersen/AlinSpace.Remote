@@ -12,13 +12,20 @@
         Unknown = 1,
         Internal = 2,
 
-        RateLimitation = 3,
-        Maintenance = 4,
+        RateLimited = 3,
 
-        NotFound = 100,
+        ServiceInMaintenance = 4,
 
-        Authentication = 200,
+        ResourceNotFound = 100,
+        ResourceLocked = 101,
 
-        Authorization = 300,
+        AuthenticationRequired = 200,
+
+        AuthorizationRequired = 300,
+
+        WrongInput = 400,
+        InvalidInput = 401,
+
+
     }
 }

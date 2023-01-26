@@ -21,7 +21,7 @@
         /// <summary>
         /// Gets the exception handler.
         /// </summary>
-        public Func<TRequest, TResponse, Exception, Task> ExceptionHandler { get; set; }
+        public Func<Exception, TRequest, TResponse, Task> ExceptionHandler { get; set; }
 
         /// <summary>
         /// Gets or sets the cancellation token.
@@ -43,7 +43,7 @@
         /// </summary>
         /// <param name="request">Request.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        public RequestResponseHandler(TRequest request, Func<TRequest, TResponse, Exception, Task> exceptionHandler = null, CancellationToken cancellationToken = default)
+        public RequestResponseHandler(TRequest request, Func<Exception, TRequest, TResponse, Task> exceptionHandler = null, CancellationToken cancellationToken = default)
         {
             Request = request;
             Response.SetCorrelationIdFromRequest(request);
@@ -82,7 +82,7 @@
                 {
                     try
                     {
-                        await ExceptionHandler.Invoke(Request, Response, e);
+                        await ExceptionHandler.Invoke(e, Request, Response);
                     }
                     catch
                     {
@@ -102,7 +102,7 @@
 
     public class RequestResponseHandler
     {
-        public static RequestResponseHandler<TRequest, TResponse> New<TRequest, TResponse>(TRequest request, Func<TRequest, TResponse, Exception, Task> exceptionHandler = null, CancellationToken cancellationToken = default)
+        public static RequestResponseHandler<TRequest, TResponse> New<TRequest, TResponse>(TRequest request, Func<Exception, TRequest, TResponse, Task> exceptionHandler = null, CancellationToken cancellationToken = default)
             where TRequest : Request
             where TResponse : Response, new()
         {
