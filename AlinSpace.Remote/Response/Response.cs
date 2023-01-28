@@ -27,11 +27,13 @@ namespace AlinSpace.Remote
         /// <summary>
         /// Gets the is success flag.
         /// </summary>
+        [JsonIgnore]
         public bool IsSuccess => ErrorCode == ErrorCode.None;
 
         /// <summary>
         /// Gets the is error flag.
         /// </summary>
+        [JsonIgnore]
         public bool IsError => !IsSuccess;
 
         #endregion

@@ -18,10 +18,14 @@
 
         ResourceNotFound = 100,
         ResourceLocked = 101,
+        ResourceExists = 102,
+        ResourceExpired = 103,
 
         AuthenticationRequired = 200,
+        AuthenticationExpired = 201,
 
         AuthorizationRequired = 300,
+        AuthorizationExpired = 301,
 
         WrongInput = 400,
         InvalidInput = 401,
