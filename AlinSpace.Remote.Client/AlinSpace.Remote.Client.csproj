@@ -6,11 +6,11 @@
     <Copyright>Copyright © 2022 Alin Andersen</Copyright>
     <PackageTags>alinspace; alin; space; remote;client</PackageTags>
     <RepositoryUrl>https://github.com/onixion/AlinSpace.Remote</RepositoryUrl>
-    <Version>1.0.19</Version>
+    <Version>1.0.20</Version>
     <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AlinSpace.Remote" Version="1.0.38" />
+    <PackageReference Include="AlinSpace.Remote" Version="1.0.39" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.13" />
   </ItemGroup>
   <ItemGroup>

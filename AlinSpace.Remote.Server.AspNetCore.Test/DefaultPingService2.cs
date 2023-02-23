@@ -1,6 +1,6 @@
 ﻿namespace AlinSpace.Remote.Server
 {
-    public class DefaultPingService : IPing
+    public class DefaultPingService2 : IPing
     {
         public Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
         {
@@ -9,7 +9,7 @@
                 .HandleAsync((request, response, cancellationToken) =>
                 {
 #if DEBUG
-                    Console.WriteLine($"[{typeof(DefaultPingService)}] PingAsync: {request.Content}");
+                    Console.WriteLine($"[{typeof(DefaultPingService2)}] PingAsync: {request.Content}");
 #endif
                     response.Content = request.Content;
                     return Task.CompletedTask;

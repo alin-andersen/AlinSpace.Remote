@@ -6,18 +6,18 @@
     public class EndpointResponse : Response
     {
         /// <summary>
-        /// Gets or sets the application name.
+        /// Gets or sets the endpoint name.
         /// </summary>
-        public string? ApplicationName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the version of the application.
+        /// Gets or sets the endpoint version.
         /// </summary>
-        public Version? ApplicationVersion { get; set; }
+        public Version ApplicationVersion { get; set; }
 
         /// <summary>
-        /// Gets or sets the local time of the endpoint.
+        /// Gets or sets the local timestamp.
         /// </summary>
-        public DateTimeOffset? EndpointLocalTime { get; set; }
+        public DateTimeOffset? LocalTimestamp { get; set; }
     }
 }
