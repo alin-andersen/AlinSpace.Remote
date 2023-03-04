@@ -1,4 +1,6 @@
-﻿namespace AlinSpace.Remote.Client.Console.Test
+﻿using System.Net.NetworkInformation;
+
+namespace AlinSpace.Remote.Client.AspNetCore.Test
 {
     internal class Program
     {
@@ -6,7 +8,9 @@
         {
             try
             {
-                var connector = Connector.New(new Uri("http://localhost:5295"));
+                var client = HttpClientFactory.Create(new Uri("http://localhost:5295"), ignoreCertificates: true);
+
+                var connector = RemoteApi.New(client);
 
                 var ping = connector.GetApi<IPing>();
 
@@ -17,7 +21,7 @@
 
                 System.Console.WriteLine(t.Content);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
             }

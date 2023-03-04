@@ -14,7 +14,7 @@ namespace AlinSpace.Remote.Server.AspNetCore
         /// <param name="builder">Builder.</param>
         /// <param name="address">Address.</param>
         /// <returns>Builder.</returns>
-        public static IWebHostBuilder UseHttpOnly(this IWebHostBuilder builder, IPAddress? address = null)
+        public static IWebHostBuilder UseHttpOnly(this IWebHostBuilder builder, IPAddress address = null)
         {
             return builder.UseKestrel(options => options.Listen(address ?? IPAddress.Loopback, 80));
         }

@@ -8,11 +8,11 @@
         /// <summary>
         /// Gets or sets the file offset.
         /// </summary>
-        public int FileOffset { get; set; }
+        public int Offset { get; set; }
 
         /// <summary>
         /// Gets or sets the file chunk size.
         /// </summary>
-        public int FileChunkSize { get; set; }
+        public int ChunkSize { get; set; }
     }
 }

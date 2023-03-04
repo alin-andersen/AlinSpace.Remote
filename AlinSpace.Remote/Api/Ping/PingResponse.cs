@@ -1,7 +1,13 @@
 ﻿namespace AlinSpace.Remote
 {
+    /// <summary>
+    /// Represents the ping response.
+    /// </summary>
     public class PingResponse : Response
     {
-        public string? Content { get; set; }
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
+        public string Content { get; set; }
     }
 }

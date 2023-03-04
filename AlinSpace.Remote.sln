@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlinSpace.Remote", "AlinSpa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlinSpace.Remote.Server", "AlinSpace.Remote.Server\AlinSpace.Remote.Server.csproj", "{6C642092-B591-4248-8C30-84528010914B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlinSpace.Remote.Client", "AlinSpace.Remote.Client\AlinSpace.Remote.Client.csproj", "{B443E974-DBBE-42A7-B3A5-44E3BCF2430F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlinSpace.Remote.Client.AspNetCore", "AlinSpace.Remote.Client.AspNetCore\AlinSpace.Remote.Client.AspNetCore.csproj", "{B443E974-DBBE-42A7-B3A5-44E3BCF2430F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlinSpace.Remote.Server.AspNetCore", "AlinSpace.Remote.Server.AspNetCore\AlinSpace.Remote.Server.AspNetCore.csproj", "{43141BCF-24A7-45DB-A711-F9DDFF2C14F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlinSpace.Remote.Server.AspNetCore.Test", "AlinSpace.Remote.Server.AspNetCore.Test\AlinSpace.Remote.Server.AspNetCore.Test.csproj", "{5FE87D40-FBDC-4F92-A8B0-E019F5E07578}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlinSpace.Remote.Server.AspNetCore.Test", "AlinSpace.Remote.Server.AspNetCore.Test\AlinSpace.Remote.Server.AspNetCore.Test.csproj", "{5FE87D40-FBDC-4F92-A8B0-E019F5E07578}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlinSpace.Remote.Client.Console.Test", "AlinSpace.Remote.Client.Console.Test\AlinSpace.Remote.Client.Console.Test.csproj", "{6192DEEA-13F7-4F48-A826-0354A311ED6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlinSpace.Remote.Client.AspNetCore.Test", "AlinSpace.Remote.Client.AspNetCore.Test\AlinSpace.Remote.Client.AspNetCore.Test.csproj", "{BE72EA78-2EF7-4300-892C-4AD49167263F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{5FE87D40-FBDC-4F92-A8B0-E019F5E07578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FE87D40-FBDC-4F92-A8B0-E019F5E07578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FE87D40-FBDC-4F92-A8B0-E019F5E07578}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6192DEEA-13F7-4F48-A826-0354A311ED6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6192DEEA-13F7-4F48-A826-0354A311ED6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6192DEEA-13F7-4F48-A826-0354A311ED6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6192DEEA-13F7-4F48-A826-0354A311ED6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE72EA78-2EF7-4300-892C-4AD49167263F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE72EA78-2EF7-4300-892C-4AD49167263F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE72EA78-2EF7-4300-892C-4AD49167263F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE72EA78-2EF7-4300-892C-4AD49167263F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

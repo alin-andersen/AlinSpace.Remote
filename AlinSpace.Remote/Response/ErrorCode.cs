@@ -11,14 +11,12 @@
         None = 0,
         Unknown = 1,
         Internal = 2,
-
-        RateLimited = 3,
-
-        ServiceInMaintenance = 4,
+        Maintenance = 3,
+        RateLimitReached = 4,
 
         ResourceNotFound = 100,
-        ResourceLocked = 101,
-        ResourceExists = 102,
+        ResourceExists = 101,
+        ResourceLocked = 102,
         ResourceExpired = 103,
 
         AuthenticationRequired = 200,

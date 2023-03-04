@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets the page.
         /// </summary>
-        public Page? Page { get; set; }
+        public Page Page { get; set; }
     }
 
     /// <summary>
@@ -20,6 +20,6 @@
         /// <summary>
         /// Gets or sets the page.
         /// </summary>
-        public Page? Page { get; set; }
+        public Page Page { get; set; }
     }
 }

@@ -14,16 +14,16 @@
         "Tags": ""
       },
       {
-        "Name": "AlinSpace.Remote.Client",
-        "Tags": "client;"
-      },
-      {
         "Name": "AlinSpace.Remote.Server",
         "Tags": "server;"
       },
       {
         "Name": "AlinSpace.Remote.Server.AspNetCore",
         "Tags": "server; asp; aspnetcore;"
+      },
+	  {
+        "Name": "AlinSpace.Remote.Client.AspNetCore",
+        "Tags": "client; asp; aspnetcore;"
       }
     ]
   }

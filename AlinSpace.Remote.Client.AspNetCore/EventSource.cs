@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
 
-namespace AlinSpace.Remote.Client
+namespace AlinSpace.Remote.Client.AspNetCore
 {
     public class EventSource : IAsyncDisposable
     {

@@ -1,23 +1,23 @@
 ﻿namespace AlinSpace.Remote
 {
     /// <summary>
-    /// Represents the endpoint response.
+    /// Represents the feature.
     /// </summary>
-    public class EndpointResponse : Response
+    public class Feature
     {
         /// <summary>
-        /// Gets or sets the endpoint name.
+        /// Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the endpoint version.
+        /// Gets or sets the version.
         /// </summary>
         public Version Version { get; set; }
 
         /// <summary>
-        /// Gets or sets the local timestamp.
+        /// Gets or sets the features.
         /// </summary>
-        public DateTimeOffset? LocalTimestamp { get; set; }
+        public IList<Feature> Features { get; set; } 
     }
 }
